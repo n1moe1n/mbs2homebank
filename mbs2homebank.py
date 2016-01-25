@@ -100,10 +100,13 @@ def convert_date(date):
 
 ### read csv
 try:
-	with open(incsv, 'rb') as csvfile:
+	with open(incsv) as csvfile:
 		reader = csv.reader(csvfile,delimiter=';', quoting=csv.QUOTE_NONE)
+		firstline = True
 		for row in reader:
-			if remove_quotes(row[0]) == "Auftragskonto":
+			# remove first line
+			if firstline:
+				firstline = False
 				continue
 
 			#date;paymode;info;payee;memo;balance;--cat;--tag
